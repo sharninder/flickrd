@@ -1,4 +1,4 @@
-package com.geekyninja.flickd;
+package com.geekyninja.flickrd;
 
 /**
  * Integration
