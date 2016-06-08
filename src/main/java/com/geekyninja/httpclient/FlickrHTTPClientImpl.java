@@ -14,13 +14,13 @@ import org.apache.http.util.EntityUtils;
 
 public class FlickrHTTPClientImpl {
 
-	private String baseUri = "https://https://api.flickr.com/services/rest/?";
+	private String baseUri = "https://https://api.flickr.com/services/rest/?format=JSON&method=";
 
 	// private constructor to support singleton
 	private FlickrHTTPClientImpl() {
 	}
 
-	public static FlickrHTTPClientImpl getInstance(String protocol, String hostname, String port) {
+	public static FlickrHTTPClientImpl getInstance() {
 		return new FlickrHTTPClientImpl();
 	}
 
@@ -31,10 +31,10 @@ public class FlickrHTTPClientImpl {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public String executeGet(String endpoint, Map<String, String> headerMap)
+	public String executeGet(String method)
 			throws ClientProtocolException, IOException {
 
-		String uri = this.baseUri + endpoint;
+		String uri = this.baseUri + method;
 		String responseObject = null;
 		CloseableHttpClient closeableHttpClient = null;
 		CloseableHttpResponse closeableHttpResponse = null;
@@ -45,23 +45,11 @@ public class FlickrHTTPClientImpl {
 
 			httpGet = new HttpGet(uri);
 
-			// add request header
-			if (headerMap != null && !headerMap.isEmpty()) {
-				Set<String> headerKeySet = headerMap.keySet();
-				for (String headerKey : headerKeySet) {
-					httpGet.setHeader(headerKey, headerMap.get(headerKey));
-				}
-			}
-
 			closeableHttpResponse = closeableHttpClient.execute(httpGet);
 
 			if (closeableHttpResponse != null) {
 				if (closeableHttpResponse.getStatusLine() != null)
-					/*
-					 * logger.info("Response Code: " +
-					 * closeableHttpResponse.getStatusLine() .getStatusCode());
-					 */
-
+				
 					if (closeableHttpResponse.getEntity() != null
 							&& closeableHttpResponse.getEntity().getContent() != null) {
 						BufferedReader rd = new BufferedReader(

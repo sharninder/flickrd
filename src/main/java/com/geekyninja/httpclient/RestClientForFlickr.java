@@ -11,12 +11,7 @@ public class RestClientForFlickr {
     public void init() {
         synchronized (this) {
             try {
-                // default
-                String port = "443";
-                String hostname = "";
-                
-                this.client = FlickrHTTPClientImpl.getInstance("https",
-                            hostname, port);
+                this.client = FlickrHTTPClientImpl.getInstance();
 
             } catch (Exception e) {
             	e.printStackTrace();
