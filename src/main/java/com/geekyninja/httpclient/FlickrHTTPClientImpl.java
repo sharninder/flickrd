@@ -14,14 +14,16 @@ import org.apache.http.util.EntityUtils;
 
 public class FlickrHTTPClientImpl {
 
-	private String baseUri = "https://https://api.flickr.com/services/rest/?format=JSON&method=";
-
+	private String baseUri = "https://api.flickr.com/services/rest/?format=json&";
+	private String apikey;
+	
 	// private constructor to support singleton
-	private FlickrHTTPClientImpl() {
+	private FlickrHTTPClientImpl(String apikey) {
+		this.apikey = apikey;
 	}
 
-	public static FlickrHTTPClientImpl getInstance() {
-		return new FlickrHTTPClientImpl();
+	public static FlickrHTTPClientImpl getInstance(String apikey) {
+		return new FlickrHTTPClientImpl(apikey);
 	}
 
 	/**
@@ -34,7 +36,9 @@ public class FlickrHTTPClientImpl {
 	public String executeGet(String method)
 			throws ClientProtocolException, IOException {
 
-		String uri = this.baseUri + method;
+		String uri = this.baseUri + "&api_key="+this.apikey+"&method="+method;
+		System.out.println(uri);
+		
 		String responseObject = null;
 		CloseableHttpClient closeableHttpClient = null;
 		CloseableHttpResponse closeableHttpResponse = null;

@@ -10,12 +10,12 @@ public class RestClientForFlickr {
      */
     public void init() {
         synchronized (this) {
-            try {
+            /*try {
                 this.client = FlickrHTTPClientImpl.getInstance();
 
             } catch (Exception e) {
             	e.printStackTrace();
-            }
+            }*/
         }
     }
 }
