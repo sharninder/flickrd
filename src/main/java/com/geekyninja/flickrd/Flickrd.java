@@ -12,6 +12,14 @@ import com.geekyninja.httpclient.RestClientForFlickr;
  */
 public class Flickrd {
 	
+	String apikey;
+	String apisecret;
+	
+	public Flickrd(String apikey, String apisecret) {
+		this.apikey = apikey;
+		this.apisecret = apisecret;
+	}
+	
 	public static void main(String[] args) {
 
 		// Add your own api key and api secret here
@@ -23,6 +31,7 @@ public class Flickrd {
 		
 		try {
 			client.callMethod("flickr.test.echo");
+			client.callMethod("flickr.collections.getTree");
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
