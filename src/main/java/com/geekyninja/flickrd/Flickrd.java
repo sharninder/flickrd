@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 
-import com.geekyninja.httpclient.FlickrHTTPClientImpl;
+import com.geekyninja.httpclient.RestClientForFlickr;
 
 /**
  * Integration
@@ -18,12 +18,11 @@ public class Flickrd {
 		String apikey = args[0];
 		String apisecret = args[1];
 
+		RestClientForFlickr client = new RestClientForFlickr();
+		client.init(apikey);
+		
 		try {
-
-			System.out.println(
-					FlickrHTTPClientImpl.getInstance(apikey).
-					executeGet("flickr.test.echo"));
-
+			client.callMethod("flickr.test.echo");
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,6 +30,8 @@ public class Flickrd {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
+
+	
+
 }
